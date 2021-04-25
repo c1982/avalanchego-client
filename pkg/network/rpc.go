@@ -12,7 +12,7 @@ type rpcClient struct {
 	networkID int
 }
 
-func (rpc *rpcClient) NewRequest(basepath, rpcmethod string, params P) (response []byte, err error) {
+func (rpc *rpcClient) NewRequest(basepath, rpcmethod string, params interface{}) (response []byte, err error) {
 	endpoint := fmt.Sprintf("%s/%s", rpc.endpoint, basepath)
 	rsp, err := jsonrpc.NewClient(endpoint).Call(rpcmethod, params)
 	if err != nil {
@@ -43,6 +43,21 @@ func (rpc *rpcClient) NewRequestFor(out interface{}, basepath, rpcmethod string,
 	}
 
 	return nil
+}
+
+func (rpc *rpcClient) NewRequestStruct(basepath, rpcmethod string, params interface{}) (results P, err error) {
+	rsp, err := rpc.NewRequest(basepath, rpcmethod, params)
+	if err != nil {
+		return results, err
+	}
+
+	results = P{}
+	err = json.Unmarshal(rsp, &results)
+	if err != nil {
+		return results, err
+	}
+
+	return results, nil
 }
 
 func (rpc *rpcClient) GetEndpoint() string {
