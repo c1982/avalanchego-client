@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-type AvmMint struct {
+type AvmMintArgs struct {
 	Amount     int64    `json:"amount"`
 	Assetid    string   `json:"assetID"`
 	To         string   `json:"to"`
@@ -15,8 +15,8 @@ type AvmMint struct {
 	Password   string   `json:"password"`
 }
 
-//BuildGenesis Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
-func (c Calls) BuildGenesis(networkID int, data json.RawMessage, encodetype string) (bytes, encoding string, err error) {
+//AVMBuildGenesis Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
+func (c Calls) AVMBuildGenesis(networkID int, data json.RawMessage, encodetype string) (bytes, encoding string, err error) {
 	jsondata, err := json.Marshal(data)
 	if err != nil {
 		return bytes, encodetype, err
@@ -40,8 +40,8 @@ func (c Calls) BuildGenesis(networkID int, data json.RawMessage, encodetype stri
 	return bytes, encoding, err
 }
 
-//CreateAddress Create a new address controlled by the given user.
-func (c Calls) CreateAddress(username, password string) (address string, err error) {
+//AVMCreateAddress Create a new address controlled by the given user.
+func (c Calls) AVMCreateAddress(username, password string) (address string, err error) {
 	rsp, err := c.client.NewRequestStruct("ext/bc/X", "avm.createAddress",
 		network.P{
 			"username": username,
@@ -55,8 +55,8 @@ func (c Calls) CreateAddress(username, password string) (address string, err err
 	return address, err
 }
 
-//CreateFixedCapAsset Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with avm.send.
-func (c Calls) CreateFixedCapAsset(asset FixedCapAsset) (assetID, changeAddr string, err error) {
+//AVMCreateFixedCapAsset Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with avm.send.
+func (c Calls) AVMCreateFixedCapAsset(asset FixedCapAssetArgs) (assetID, changeAddr string, err error) {
 	rsp, err := c.client.NewRequestStruct("ext/bc/X", "avm.createFixedCapAsset", asset)
 	if err != nil {
 		return assetID, changeAddr, err
@@ -70,8 +70,8 @@ func (c Calls) CreateFixedCapAsset(asset FixedCapAsset) (assetID, changeAddr str
 	return assetID, changeAddr, err
 }
 
-//Mint Mint units of a variable-cap asset
-func (c Calls) Mint(mint AvmMint) (txID, changeAddr string, err error) {
+//AVMMint Mint units of a variable-cap asset
+func (c Calls) AVMMint(mint AvmMintArgs) (txID, changeAddr string, err error) {
 	rsp, err := c.client.NewRequestStruct("ext/bc/X", "avm.mint", mint)
 	if err != nil {
 		return txID, changeAddr, err
@@ -85,8 +85,8 @@ func (c Calls) Mint(mint AvmMint) (txID, changeAddr string, err error) {
 	return txID, changeAddr, err
 }
 
-//CreateVariableCapAsset Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using avm.mint.
-func (c Calls) CreateVariableCapAsset(asset CreateVariableCapAsset) (assetID, changeAddr string, err error) {
+//AVMCreateVariableCapAsset Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using avm.mint.
+func (c Calls) AVMCreateVariableCapAsset(asset CreateVariableCapAssetArgs) (assetID, changeAddr string, err error) {
 	rsp, err := c.client.NewRequestStruct("ext/bc/X", "amv.createVariableCapAsset", asset)
 	if err != nil {
 		return assetID, changeAddr, err
@@ -98,4 +98,53 @@ func (c Calls) CreateVariableCapAsset(asset CreateVariableCapAsset) (assetID, ch
 		Error()
 
 	return assetID, changeAddr, err
+}
+
+//AVMExport Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call avax.import on the C-Chain to complete the transfer.
+func (c Calls) AVMExport(export ExportArgs) (txID, changeAddr string, err error) {
+	rsp, err := c.client.NewRequestStruct("ext/bc/X", "avm.export", export)
+	if err != nil {
+		return txID, changeAddr, err
+	}
+
+	err = rsp.
+		OutStr("txID", &txID).
+		OutStr("changeAddr", &changeAddr).
+		Error()
+
+	return txID, changeAddr, err
+}
+
+//AVMExportAVAX Send AVAX from the X-Chain to another chain. After calling this method, you must call import on the other chain to complete the transfer.
+func (c Calls) AVMExportAVAX(args ExportAVAXArgs) (txID, changeAddr string, err error) {
+	rsp, err := c.client.NewRequestStruct("ext/bc/X", "avm.exportAVAX", args)
+	if err != nil {
+		return txID, changeAddr, err
+	}
+
+	err = rsp.
+		OutStr("txID", &txID).
+		OutStr("changeAddr", &changeAddr).
+		Error()
+
+	return txID, changeAddr, err
+}
+
+//AVMExportKey Get the private key that controls a given address. The returned private key can be added to a user with avm.importKey.
+func (c Calls) AVMExportKey(username, password, address string) (privateKey string, err error) {
+	rsp := network.P{}
+	err = c.client.NewRequestFor(&rsp, "ext/bc/X", "avm.exportKey", network.P{
+		"username": username,
+		"password": password,
+		"address":  address,
+	})
+	if err != nil {
+		return privateKey, err
+	}
+
+	err = rsp.
+		OutStr("privateKey", &privateKey).
+		Error()
+
+	return privateKey, err
 }
