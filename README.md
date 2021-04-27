@@ -16,8 +16,6 @@ The Avalanche Platform Go Library
 
 ### Documents
 
-...
-
 ## Requirements
 
 Go 1.15+

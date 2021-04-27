@@ -20,12 +20,12 @@ func (rpc *rpcClient) NewRequest(basepath, rpcmethod string, params interface{})
 	}
 
 	if rsp.Error != nil {
-		return response, fmt.Errorf("rpcClient returned error: %d, %s", rsp.Error.Code, rsp.Error.Message)
+		return response, fmt.Errorf("rpc client returned error: %d, %s", rsp.Error.Code, rsp.Error.Message)
 	}
 
 	response, err = json.Marshal(rsp.Result)
 	if err != nil {
-		return response, fmt.Errorf("rpcClient returned invalid JSON object: %v", rsp.Result)
+		return response, fmt.Errorf("rpc client returned invalid JSON object: %v", rsp.Result)
 	}
 
 	return response, nil

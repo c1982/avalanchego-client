@@ -56,15 +56,10 @@ func (c Calls) ExportUser(username, password string) (user, encoding string, err
 		return user, encoding, err
 	}
 
-	user, isstring := (out["user"]).(string)
-	if !isstring {
-		return user, encoding, errors.New("invalid type of 'user' key")
-	}
-
-	encoding, isstring = (out["encoding"]).(string)
-	if !isstring {
-		return user, encoding, errors.New("invalid type of 'encoding' key")
-	}
+	err = out.
+		OutStr("user", &user).
+		OutStr("encoding", &encoding).
+		Error()
 
 	return user, encoding, err
 }
