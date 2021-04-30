@@ -1,14 +1,16 @@
+//go:generate go run gen.go
+//This file generate all api calls in to the pkg/api directory.
 package main
 
 import (
 	"fmt"
+	"gopkg.in/yaml.v2"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
 	"strings"
-
-	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -31,7 +33,7 @@ func main() {
 	}
 
 	for k := range chains {
-		inputfile := fmt.Sprintf("./%s.api.yaml", k)
+		inputfile := fmt.Sprintf("./config/%s.api.yaml", k)
 		outputfile := fmt.Sprintf("./pkg/api/%s_gen.go", k)
 
 		content, err := ioutil.ReadFile(inputfile)
@@ -48,6 +50,12 @@ func main() {
 
 		packageTemplate.Execute(f, clls)
 	}
+
+	_, err := exec.Command("go", "fmt ./...").Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
 
 var packageTemplate = template.Must(template.New("").Parse(`// Code generated for package api by gen.go DO NOT EDIT. (@generated)
