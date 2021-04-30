@@ -1,0 +1,7 @@
+Api:
+  - name: health.getLiveness
+    path: ext/health
+    struct-args: false
+    args: []
+    struct-returns: true
+    returns: [["checks", "GetLivenessResponse"], ["err", "error"]]

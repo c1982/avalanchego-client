@@ -1,0 +1,13 @@
+Api:
+  - name: index.getLastAccepted
+    path: ext/index/X/tx
+    struct-args: false
+    args: [["encoding", "string"]]
+    struct-returns: true
+    returns: [["lastaccepted", "GetLastAcceptedResponse"], ["err", "error"]]
+  - name: index.getContainerByIndex
+    path: ext/index/X/tx
+    struct-args: false
+    args: [["index", "int"], ["encoding", "string"]]
+    struct-returns: true
+    returns: [["container", "GetContainerByIndexResponse"], ["err", "error"]]

@@ -1,0 +1,178 @@
+Api:
+  - name: avm.createAddress
+    path: ext/bc/X
+    struct-args: false
+    args: [["username", "string"], ["password", "string"]]
+    struct-returns: false
+    returns: [["address", string], ["err", "error"]]
+  - name: avm.createFixedCapAsset
+    path: ext/bc/X
+    struct-args: true
+    args: [["asset", "FixedCapAssetArgs"]]
+    struct-returns: false
+    returns: [["assetID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.mint
+    path: ext/bc/X
+    struct-args: true
+    args: [["mint", "AvmMintArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.createVariableCapAsset
+    path: ext/bc/X
+    struct-args: true
+    args: [["asset", "CreateVariableCapAssetArgs"]]
+    struct-returns: false
+    returns: [["assetID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.createNFTAsset
+    path: ext/bc/X
+    struct-args: true
+    args: [["asset", "NFTAssetArgs"]]
+    struct-returns: false
+    returns: [["assetID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.mintNFT
+    path: ext/bc/X
+    struct-args: true
+    args: [["mint", "MintNFTArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.export
+    path: ext/bc/X
+    struct-args: true
+    args: [["mint", "ExportArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.exportAVAX
+    path: ext/bc/X
+    struct-args: true
+    args: [["mint", "ExportAVAXArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.exportKey
+    path: ext/bc/X
+    struct-args: false
+    args:
+      [["username", "string"], ["password", "string"], ["address", "string"]]
+    struct-returns: false
+    returns: [["privateKey", string], ["err", "error"]]
+  - name: avm.getAllBalances
+    path: ext/bc/X
+    struct-args: false
+    args: [["address", "string"]]
+    struct-returns: true
+    returns: [["balances", "[]BalancesResponse"], ["err", "error"]]
+  - name: avm.getAssetDescription
+    path: ext/bc/X
+    struct-args: false
+    args: [["assetid", "string"]]
+    struct-returns: false
+    returns:
+      [
+        ["assetID", "string"],
+        ["name", "string"],
+        ["symbol", "string"],
+        ["denomination", "string"],
+        ["err", "error"],
+      ]
+  - name: avm.getBalance
+    path: ext/bc/X
+    struct-args: false
+    args: [["address", "string"], ["assetID", "string"]]
+    struct-returns: true
+    returns: [["balance", "BalanceResponse"], ["err", "error"]]
+  - name: avm.getTx
+    path: ext/bc/X
+    struct-args: false
+    args: [["txid", "string"], ["encode", "string"]]
+    struct-returns: false
+    returns: [["tx", "string"], ["encoding", "string"], ["err", "error"]]
+  - name: avm.getTxStatus
+    path: ext/bc/X
+    struct-args: false
+    args: [["txID", "string"]]
+    struct-returns: false
+    returns: [["status", "string"], ["err", "error"]]
+  - name: avm.getUTXOs
+    path: ext/bc/X
+    struct-args: true
+    args: [["utxo", "GetUTXOsArgs"]]
+    struct-returns: true
+    returns: [["utxorsp", "GetUTXOsResponse"], ["err", "error"]]
+  - name: avm.import
+    path: ext/bc/X
+    struct-args: false
+    args:
+      [
+        ["to", "string"],
+        ["sourceChain", "string"],
+        ["username", "string"],
+        ["password", "string"],
+      ]
+    struct-returns: false
+    returns: [["txID", "string"], ["err", "error"]]
+  - name: avm.importAVAX
+    path: ext/bc/X
+    struct-args: false
+    args:
+      [
+        ["to", "string"],
+        ["sourceChain", "string"],
+        ["username", "string"],
+        ["password", "string"],
+      ]
+    struct-returns: false
+    returns: [["txID", "string"], ["err", "error"]]
+  - name: avm.importKey
+    path: ext/bc/X
+    struct-args: false
+    args:
+      [["privateKey", "string"], ["username", "string"], ["password", "string"]]
+    struct-returns: false
+    returns: [["address", "string"], ["err", "error"]]
+  - name: avm.issueTx
+    path: ext/bc/X
+    struct-args: false
+    args: [["tx", "string"], ["encoding", "string"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["err", "error"]]
+  - name: avm.listAddresses
+    path: ext/bc/X
+    struct-args: false
+    args: [["username", "string"], ["password", "string"]]
+    struct-returns: true
+    returns: [["addresses", "ListAddressesResponse"], ["err", "error"]]
+  - name: avm.send
+    path: ext/bc/X
+    struct-args: true
+    args: [["send", "SendArgs"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.sendMultiple
+    path: ext/bc/X
+    struct-args: true
+    args: [["sendmultiple", "SendMultipleArgs"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
+  - name: avm.sendNFT
+    path: ext/bc/X
+    struct-args: true
+    args: [["sendNFT", "SendNFTArgs"]]
+    struct-returns: true
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
+  - name: wallet.issueTx
+    path: ext/bc/X/wallet
+    struct-args: false
+    args: [["tx", "string"], ["encoding", "string"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["err", "error"]]
+  - name: wallet.send
+    path: ext/bc/X/wallet
+    struct-args: true
+    args: [["send", "SendWalletArgs"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
+  - name: wallet.sendMultiple
+    path: ext/bc/X/wallet
+    struct-args: true
+    args: [["send", "SendMultipleArgs"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]

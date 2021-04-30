@@ -1,7 +1,6 @@
 package network
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/ybbus/jsonrpc"
@@ -12,52 +11,23 @@ type rpcClient struct {
 	networkID int
 }
 
-func (rpc *rpcClient) NewRequest(basepath, rpcmethod string, params interface{}) (response []byte, err error) {
+func (rpc *rpcClient) NewRequest(basepath, rpcmethod string, input interface{}, output interface{}) (err error) {
 	endpoint := fmt.Sprintf("%s/%s", rpc.endpoint, basepath)
-	rsp, err := jsonrpc.NewClient(endpoint).Call(rpcmethod, params)
+	rsp, err := jsonrpc.NewClient(endpoint).Call(rpcmethod, input)
 	if err != nil {
-		return response, err
+		return err
 	}
 
 	if rsp.Error != nil {
-		return response, fmt.Errorf("rpc client returned error: %d, %s", rsp.Error.Code, rsp.Error.Message)
+		return fmt.Errorf("rpc client returned error: %d, %s", rsp.Error.Code, rsp.Error.Message)
 	}
 
-	response, err = json.Marshal(rsp.Result)
+	err = rsp.GetObject(&output)
 	if err != nil {
-		return response, fmt.Errorf("rpc client returned invalid JSON object: %v", rsp.Result)
-	}
-
-	return response, nil
-}
-
-func (rpc *rpcClient) NewRequestFor(out interface{}, basepath, rpcmethod string, params P) error {
-	rsp, err := rpc.NewRequest(basepath, rpcmethod, params)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(rsp, out)
-	if err != nil {
-		return err
+		return fmt.Errorf("rpc client returned invalid JSON object: %v", rsp.Result)
 	}
 
 	return nil
-}
-
-func (rpc *rpcClient) NewRequestStruct(basepath, rpcmethod string, params interface{}) (results P, err error) {
-	rsp, err := rpc.NewRequest(basepath, rpcmethod, params)
-	if err != nil {
-		return results, err
-	}
-
-	results = P{}
-	err = json.Unmarshal(rsp, &results)
-	if err != nil {
-		return results, err
-	}
-
-	return results, nil
 }
 
 func (rpc *rpcClient) GetEndpoint() string {

@@ -1,0 +1,7 @@
+Api:
+  - name: metrics
+    path: ext/metrics
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["metrics", "string"], ["err", "error"]]

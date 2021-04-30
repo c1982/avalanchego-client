@@ -1,0 +1,19 @@
+Api:
+  - name: admin.alias
+    path: ext/admin
+    struct-args: false
+    args: [["alias", "string"], ["endpoint", "string"]]
+    struct-returns: false
+    returns: [["success", "bool"], ["err", "error"]]
+  - name: admin.aliasChain
+    path: ext/admin
+    struct-args: false
+    args: [["chain", "string"], ["alias", "string"]]
+    struct-returns: false
+    returns: [["success", "bool"], ["err", "error"]]
+  - name: admin.getChainAliases
+    path: ext/admin
+    struct-args: false
+    args: [["chain", "string"]]
+    struct-returns: true
+    returns: [["aliases", "GetChainAliasesResponse"], ["err", "error"]]

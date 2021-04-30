@@ -1,7 +1,6 @@
-package network_test
+package api
 
 import (
-	"avalanchego-client/pkg/network"
 	"testing"
 )
 
@@ -9,7 +8,7 @@ func TestPDTOKey(t *testing.T) {
 
 	user, txID, changeAddr := "", "", ""
 
-	p := network.P{}
+	p := P{}
 	p["user"] = "user"
 	p["txID"] = "txID"
 	p["changeAddr"] = "changeAddr"

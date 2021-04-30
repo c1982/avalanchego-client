@@ -1,0 +1,22 @@
+Api:
+  - name: avax.export
+    path: ext/bc/C/avax
+    struct-args: false
+    args:
+      [
+        ["to", "string"],
+        ["amount", "int64"],
+        ["assetid", "string"],
+        ["username", "string"],
+        ["password", "string"],
+      ]
+    struct-returns: false
+    returns: [["txID", string], ["err", "error"]]
+  - name: avax.exportKey
+    path: ext/bc/C/avax
+    struct-args: false
+    args:
+      [["address", "string"], ["username", "string"], ["password", "string"]]
+    struct-returns: false
+    returns:
+      [["privateKey", "string"], ["privateKeyHex", "string"], ["err", "error"]]

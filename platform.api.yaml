@@ -1,0 +1,43 @@
+Api:
+  - name: platform.addDelegator
+    path: ext/P
+    struct-args: true
+    args: [["delegator", "AddDelegatorArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: platform.addValidator
+    path: ext/P
+    struct-args: true
+    args: [["validator", "AddValidatorArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: platform.addSubnetValidator
+    path: ext/P
+    struct-args: true
+    args: [["subnetvalidator", "AddSubnetValidatorArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: platform.createAddress
+    path: ext/P
+    struct-args: false
+    args: [["username", "string"], ["password", "string"]]
+    struct-returns: false
+    returns: [["address", string], ["err", "error"]]
+  - name: platform.createBlockchain
+    path: ext/P
+    struct-args: true
+    args: [["blockchain", "CreateBlockchainArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+  - name: platform.createSubnet
+    path: ext/P
+    struct-args: true
+    args: [["subnet", "CreateSubnetArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["err", "error"]]
+  - name: platform.exportAVAX
+    path: ext/P
+    struct-args: true
+    args: [["avax", "PlatformExportAVAXArgs"]]
+    struct-returns: false
+    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]

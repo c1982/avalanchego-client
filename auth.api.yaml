@@ -1,0 +1,19 @@
+Api:
+  - name: auth.newToken
+    path: ext/auth
+    struct-args: true
+    args: [["newtoken", "NewTokenArgs"]]
+    struct-returns: false
+    returns: [["token", "string"], ["err", "error"]]
+  - name: auth.revokeToken
+    path: ext/auth
+    struct-args: false
+    args: [["password", "string"], ["token", "string"]]
+    struct-returns: false
+    returns: [["success", "bool"], ["err", "error"]]
+  - name: auth.changePassword
+    path: ext/auth
+    struct-args: false
+    args: [["oldPassword", "string"], ["newPassword", "string"]]
+    struct-returns: false
+    returns: [["success", "bool"], ["err", "error"]]

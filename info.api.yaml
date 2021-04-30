@@ -1,0 +1,7 @@
+Api:
+  - name: info.getBlockchainID
+    path: ext/info
+    struct-args: false
+    args: [["alias", "string"]]
+    struct-returns: false
+    returns: [["blockchainID", "string"], ["err", "error"]]
