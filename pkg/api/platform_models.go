@@ -197,3 +197,12 @@ type PlatformGetUTXOsResponse struct {
 	} `json:"result"`
 	ID int `json:"id"`
 }
+
+type PlatformImportAVAXArgs struct {
+	Sourcechain string   `json:"sourceChain"`
+	To          string   `json:"to"`
+	From        []string `json:"from"`
+	Changeaddr  string   `json:"changeAddr"`
+	Username    string   `json:"username"`
+	Password    string   `json:"password"`
+}

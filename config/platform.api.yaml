@@ -144,3 +144,40 @@ Api:
     args: [["addresses", "PlatformGetUTXOsArgs"]]
     struct-returns: false
     returns: [["utxos", "PlatformGetUTXOsResponse"], ["err", "error"]]
+  - name: platform.importAVAX
+    path: ext/P
+    struct-args: true
+    args: [["import", "PlatformImportAVAXArgs"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
+  - name: platform.importKey
+    path: ext/P
+    struct-args: false
+    args:
+      [["username", "string"], ["password", "string"], ["privateKey", "string"]]
+    struct-returns: false
+    returns: [["address", "string"], ["err", "error"]]
+  - name: platform.issueTx
+    path: ext/P
+    struct-args: false
+    args: [["tx", "string"], ["encoding", "string"]]
+    struct-returns: false
+    returns: [["txID", "string"], ["err", "error"]]
+  - name: platform.listAddresses
+    path: ext/bc/P
+    struct-args: false
+    args: [["username", "string"], ["password", "string"]]
+    struct-returns: true
+    returns: [["addresses", "[]string"], ["err", "error"]]
+  - name: platform.sampleValidators
+    path: ext/P
+    struct-args: false
+    args: [["size", "int"], ["subnetID", "string"]]
+    struct-returns: true
+    returns: [["validators", "[]string"], ["err", "error"]]
+  - name: platform.validatedBy
+    path: ext/P
+    struct-args: false
+    args: [["subnetID", "string"]]
+    struct-returns: true
+    returns: [["blockchainIDs", "[]string"], ["err", "error"]]
