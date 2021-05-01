@@ -28,16 +28,119 @@ Api:
     struct-args: true
     args: [["blockchain", "CreateBlockchainArgs"]]
     struct-returns: false
-    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
   - name: platform.createSubnet
     path: ext/P
     struct-args: true
     args: [["subnet", "CreateSubnetArgs"]]
     struct-returns: false
-    returns: [["txID", string], ["err", "error"]]
+    returns: [["txID", "string"], ["err", "error"]]
   - name: platform.exportAVAX
     path: ext/P
     struct-args: true
     args: [["avax", "PlatformExportAVAXArgs"]]
     struct-returns: false
-    returns: [["txID", string], ["changeAddr", "string"], ["err", "error"]]
+    returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
+  - name: platform.exportKey
+    path: ext/P
+    struct-args: false
+    args:
+      [["username", "string"], ["password", "string"], ["address", "string"]]
+    struct-returns: false
+    returns: [["privateKey", "string"], ["err", "error"]]
+  - name: platform.getBalance
+    path: ext/P
+    struct-args: false
+    args: [["address", "string"]]
+    struct-returns: true
+    returns: [["balance", "GetBalanceResponse"], ["err", "error"]]
+  - name: platform.getBlockchains
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: true
+    returns: [["blockchains", "GetBlockchainsResponse"], ["err", "error"]]
+  - name: platform.getBlockchainStatus
+    path: ext/P
+    struct-args: false
+    args: [["blockchainID", "string"]]
+    struct-returns: false
+    returns: [["status", "string"], ["err", "error"]]
+  - name: platform.getCurrentSupply
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["supply", "string"], ["err", "error"]]
+  - name: platform.getCurrentValidators
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: true
+    returns: [["validators", "GetCurrentValidatorsResponse"], ["err", "error"]]
+  - name: platform.getHeight
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["height", "int"], ["err", "error"]]
+  - name: platform.getMinStake
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns:
+      [
+        ["minValidatorStake", "uint64"],
+        ["minDelegatorStake", "uint64"],
+        ["err", "error"],
+      ]
+  - name: platform.getPendingValidators
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: true
+    returns:
+      [["pendinvalidators", "GetPendingValidatorsResponse"], ["err", "error"]]
+  - name: platform.getStakingAssetID
+    path: ext/P
+    struct-args: false
+    args: [["subnetID", "string"]]
+    struct-returns: false
+    returns: [["assetID", "string"], ["err", "error"]]
+  - name: platform.getSubnets
+    path: ext/P
+    struct-args: false
+    args: [["ids", "[]string"]]
+    struct-returns: true
+    returns: [["subnets", "GetSubnetsResponse"], ["err", "error"]]
+  - name: platform.getStake
+    path: ext/P
+    struct-args: true
+    args: [["addresses", "GetStakeArgs"]]
+    struct-returns: false
+    returns: [["staked", "int"], ["err", "error"]]
+  - name: platform.getTotalStake
+    path: ext/P
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["stake", "int"], ["err", "error"]]
+  - name: platform.getTx
+    path: ext/P
+    struct-args: false
+    args: [["txID", "string"], ["encoding", "string"]]
+    struct-returns: false
+    returns: [["tx", "sring"], ["encode", "string"], ["err", "error"]]
+  - name: platform.getTxStatus
+    path: ext/P
+    struct-args: false
+    args: [["txID", "string"]]
+    struct-returns: false
+    returns: [["status", "sring"], ["err", "error"]]
+  - name: platform.getUTXOs
+    path: ext/bc/P
+    struct-args: false
+    args: [["addresses", "PlatformGetUTXOsArgs"]]
+    struct-returns: false
+    returns: [["utxos", "PlatformGetUTXOsResponse"], ["err", "error"]]
