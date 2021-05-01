@@ -16,7 +16,40 @@ Api:
     path: ext/bc/C/avax
     struct-args: false
     args:
+      [["username", "string"], ["password", "string"], ["address", "string"]]
+    struct-returns: false
+    returns:
+      [["privateKey", string], ["privateKeyHex", "string"], ["err", "error"]]
+  - name: avax.exportKey
+    path: ext/bc/C/avax
+    struct-args: false
+    args:
       [["address", "string"], ["username", "string"], ["password", "string"]]
     struct-returns: false
     returns:
       [["privateKey", "string"], ["privateKeyHex", "string"], ["err", "error"]]
+  - name: avax.getUTXOs
+    path: ext/bc/C/avax
+    struct-args: true
+    args: [["UTXOs", "AVAXGetUTXOsArgs"]]
+    struct-returns: true
+    returns: [["utxos", "AVAXGetUTXOsResponse"], ["err", "error"]]
+  - name: avax.import
+    path: ext/bc/C/avax
+    struct-args: false
+    args:
+      [
+        ["to", "string"],
+        ["sourceChain", "string"],
+        ["username", "string"],
+        ["password", "string"],
+      ]
+    struct-returns: false
+    returns: [["txID", "string"], ["err", "error"]]
+  - name: avax.importKey
+    path: ext/bc/C/avax
+    struct-args: false
+    args:
+      [["username", "string"], ["password", "string"], ["privateKey", "string"]]
+    struct-returns: false
+    returns: [["address", "string"], ["err", "error"]]
