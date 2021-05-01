@@ -5,3 +5,52 @@ Api:
     args: [["alias", "string"]]
     struct-returns: false
     returns: [["blockchainID", "string"], ["err", "error"]]
+  - name: info.getNetworkID
+    path: ext/info
+    struct-args: false
+    args: [["alias", "string"]]
+    struct-returns: false
+    returns: [["networkID", "int"], ["err", "error"]]
+  - name: info.getNetworkName
+    path: ext/info
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["networkName", "string"], ["err", "error"]]
+  - name: info.getNodeID
+    path: ext/info
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["nodeID", "string"], ["err", "error"]]
+  - name: info.getNodeIP
+    path: ext/info
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["ip", "string"], ["err", "error"]]
+  - name: info.getNodeVersion
+    path: ext/info
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["version", "string"], ["err", "error"]]
+  - name: info.isBootstrapped
+    path: ext/info
+    struct-args: false
+    args: [["chain", "string"]]
+    struct-returns: false
+    returns: [["isBootstrapped", "bool"], ["err", "error"]]
+  - name: info.peers
+    path: ext/info
+    struct-args: false
+    args: [["nodeIDs", "[]string"]]
+    struct-returns: true
+    returns: [["peers", "InfoPeersArgs"], ["err", "error"]]
+  - name: info.getTxFee
+    path: ext/info
+    struct-args: false
+    args: [["nodeIDs", "[]string"]]
+    struct-returns: false
+    returns:
+      [["creationTxFee", "uint64"], ["txFee", "uint64"], ["err", "error"]]

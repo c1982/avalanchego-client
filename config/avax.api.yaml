@@ -20,14 +20,6 @@ Api:
     struct-returns: false
     returns:
       [["privateKey", string], ["privateKeyHex", "string"], ["err", "error"]]
-  - name: avax.exportKey
-    path: ext/bc/C/avax
-    struct-args: false
-    args:
-      [["address", "string"], ["username", "string"], ["password", "string"]]
-    struct-returns: false
-    returns:
-      [["privateKey", "string"], ["privateKeyHex", "string"], ["err", "error"]]
   - name: avax.getUTXOs
     path: ext/bc/C/avax
     struct-args: true

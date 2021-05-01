@@ -6,3 +6,9 @@ Api:
     struct-returns: false
     returns:
       [["decisionsURL", "string"], ["consensusURL", "string"], ["err", "error"]]
+  - name: ipcs.unpublishBlockchain
+    path: ext/ipcs
+    struct-args: false
+    args: [["blockchainID", "string"]]
+    struct-returns: false
+    returns: [["success", "bool"], ["err", "error"]]

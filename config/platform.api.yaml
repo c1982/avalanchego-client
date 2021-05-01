@@ -131,13 +131,13 @@ Api:
     struct-args: false
     args: [["txID", "string"], ["encoding", "string"]]
     struct-returns: false
-    returns: [["tx", "sring"], ["encode", "string"], ["err", "error"]]
+    returns: [["tx", "string"], ["encode", "string"], ["err", "error"]]
   - name: platform.getTxStatus
     path: ext/P
     struct-args: false
     args: [["txID", "string"]]
     struct-returns: false
-    returns: [["status", "sring"], ["err", "error"]]
+    returns: [["status", "string"], ["err", "error"]]
   - name: platform.getUTXOs
     path: ext/bc/P
     struct-args: false
@@ -147,7 +147,7 @@ Api:
   - name: platform.importAVAX
     path: ext/P
     struct-args: true
-    args: [["import", "PlatformImportAVAXArgs"]]
+    args: [["imports", "PlatformImportAVAXArgs"]]
     struct-returns: false
     returns: [["txID", "string"], ["changeAddr", "string"], ["err", "error"]]
   - name: platform.importKey

@@ -8,6 +8,29 @@ Api:
   - name: index.getContainerByIndex
     path: ext/index/X/tx
     struct-args: false
-    args: [["index", "int"], ["encoding", "string"]]
+    args: [["index", "uint64"], ["encoding", "string"]]
     struct-returns: true
     returns: [["container", "GetContainerByIndexResponse"], ["err", "error"]]
+  - name: index.getContainerRange
+    path: ext/index/X/tx
+    struct-args: false
+    args:
+      [
+        ["startIndex", "uint64"],
+        ["numToFetch", "uint64"],
+        ["encoding", "string"],
+      ]
+    struct-returns: true
+    returns: [["container", "[]GetContainerRangeResponse"], ["err", "error"]]
+  - name: index.getIndex
+    path: ext/index/X/tx
+    struct-args: false
+    args: [["containerID", "string"], ["encoding", "string"]]
+    struct-returns: false
+    returns: [["index", "string"], ["err", "error"]]
+  - name: index.isAccepted
+    path: ext/index/X/tx
+    struct-args: false
+    args: [["containerID", "string"], ["encoding", "string"]]
+    struct-returns: false
+    returns: [["isAccepted", "bool"], ["err", "error"]]

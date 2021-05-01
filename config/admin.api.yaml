@@ -17,3 +17,27 @@ Api:
     args: [["chain", "string"]]
     struct-returns: true
     returns: [["aliases", "GetChainAliasesResponse"], ["err", "error"]]
+  - name: admin.lockProfile
+    path: ext/admin
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["success", bool], ["err", "error"]]
+  - name: admin.memoryProfile
+    path: ext/admin
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["success", bool], ["err", "error"]]
+  - name: admin.startCPUProfiler
+    path: ext/admin
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["success", bool], ["err", "error"]]
+  - name: admin.stopCPUProfiler
+    path: ext/admin
+    struct-args: false
+    args: []
+    struct-returns: false
+    returns: [["success", bool], ["err", "error"]]
