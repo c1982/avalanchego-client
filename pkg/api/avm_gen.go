@@ -107,7 +107,7 @@ func (c Calls) AvmExportKey(username string, password string, address string) (p
 	return privateKey, err
 }
 
-func (c Calls) AvmGetAllBalances(address string) (balances []BalancesResponse, err error) {
+func (c Calls) AvmGetAllBalances(address string) (balances BalancesResponse, err error) {
 	input := P{
 		"address": address,
 	}

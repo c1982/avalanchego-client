@@ -59,7 +59,7 @@ Api:
     struct-args: false
     args: [["address", "string"]]
     struct-returns: true
-    returns: [["balances", "[]BalancesResponse"], ["err", "error"]]
+    returns: [["balances", "BalancesResponse"], ["err", "error"]]
   - name: avm.getAssetDescription
     path: ext/bc/X
     struct-args: false
